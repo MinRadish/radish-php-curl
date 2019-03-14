@@ -1,0 +1,21 @@
+{
+    "name": "min-radish/php-curl",
+    "description": "PHP下Curl的封装",
+    "keywords": ["PHP", "Curl"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Radish",
+            "email": "1004622952@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "Radish\\network\\": "src/"
+        }
+    }
+}
