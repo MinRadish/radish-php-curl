@@ -33,12 +33,19 @@ class Curl
         curl_setopt_array(self::$curl, $options);
     }
 
-    protected static function end()
+    protected static function end($error)
     {
+        if ($error) {
+            $error = curl_error(self::$curl);
+            curl_close(self::$curl);
+            if ($error) {
+                throw new \Exception($error, 1);
+            }
+        }
         curl_close(self::$curl);
     }
 
-    public static function get($url, $options = [])
+    public static function get($url, $options = [], $error = false)
     {
         static::init($options);
 
@@ -49,12 +56,12 @@ class Curl
 
         $result = curl_exec(self::$curl);
 
-        static::end();
+        static::end($error);
 
         return $result;
     }
 
-    public static function post($url, $data, $options = [])
+    public static function post($url, $data, $options = [], $error = false)
     {
         static::init($options);
 
@@ -64,12 +71,12 @@ class Curl
 
         $result = curl_exec(self::$curl);
 
-        static::end();
+        static::end($error);
 
         return $result;
     }
 
-    public static function put($url, $data, $options = [])
+    public static function put($url, $data, $options = [], $error = false)
     {
         static::init($options);
 
@@ -79,12 +86,12 @@ class Curl
 
         $result = curl_exec(self::$curl);
 
-        static::end();
+        static::end($error);
 
         return $result;
     }
 
-    public static function delete($url, $options = [])
+    public static function delete($url, $options = [], $error = false)
     {
         static::init($options);
 
@@ -93,14 +100,8 @@ class Curl
 
         $result = curl_exec(self::$curl);
 
-        static::end();
+        static::end($error);
 
         return $result;
-    }
-
-    //待定
-    public static function error()
-    {
-        return curl_error(self::$curl);
     }
 }
