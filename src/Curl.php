@@ -1,5 +1,5 @@
 <?php
-namespace Radish\network;
+namespace Radish\Network;
 
 /**
 * @author Radish
