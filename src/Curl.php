@@ -41,8 +41,9 @@ class Curl
             if ($error) {
                 throw new \Exception($error, 1);
             }
+        } else {
+            curl_close(self::$curl);
         }
-        curl_close(self::$curl);
     }
 
     public static function get($url, $options = [], $error = false)
